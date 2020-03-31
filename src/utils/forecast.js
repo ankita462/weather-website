@@ -7,7 +7,10 @@ const forecast=(latitude,longitude,callback) => {
     } else if(body.error) {
         callback('unable to find location. Try another Search!',undefined) 
     } else {
-        callback(undefined,body.daily.data[0].summary+' It is currently ' +body.currently.temperature + ' celsius degrees out. There is '+body.currently.precipProbability+'% chance of rain' )
+        const farh=body.currently.temperature
+        const cel=(farh-32)*5/9;
+        const cel1=cel.toPrecision(4)
+        callback(undefined,body.daily.data[0].summary+' It is currently ' +cel1 +' celsius degrees out. There high today is ' + body.daily.data[0].temperatureHigh+ '. There low today is ' + body.daily.data[0].temperatureLow+'. There is '+body.currently.precipProbability+'% chance of rain' )
     }
 })
 }
