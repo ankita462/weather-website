@@ -10,7 +10,9 @@ const forecast=(latitude,longitude,callback) => {
         const farh=body.currently.temperature
         const cel=(farh-32)*5/9;
         const cel1=cel.toPrecision(4)
-        callback(undefined,body.daily.data[0].summary+' It is currently ' +cel1 +' celsius degrees out. There high today is ' + body.daily.data[0].temperatureHigh+ '. There low today is ' + body.daily.data[0].temperatureLow+'. There is '+body.currently.precipProbability+'% chance of rain' )
+        const high=(body.daily.data[0].temperatureHigh-32)*5/9
+        const low=(body.daily.data[0].temperatureLow-32)*5/9
+        callback(undefined,body.daily.data[0].summary+' It is currently ' +cel1 +' celsius degrees out. There high today is ' + high.toPrecision(4)+ '. There low today is ' + low.toPrecision(4)+'. There is '+body.currently.precipProbability+'% chance of rain' )
     }
 })
 }
